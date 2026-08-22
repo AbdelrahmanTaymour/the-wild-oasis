@@ -94,7 +94,7 @@ function Header({ children }: { children: ReactNode }) {
 function Row({ children }: { children: ReactNode }) {
   const { columns } = useContext(TableContext);
   return (
-    <StyledRow role="row" as="row" columns={columns}>
+    <StyledRow role="row" columns={columns}>
       {children}
     </StyledRow>
   );

@@ -105,7 +105,7 @@ function Window({
   const context = useContext(ModalContext);
   if (!context) throw new Error("Window must be used within a Modal");
 
-  const ref = useOutsideClick(context?.close);
+  const ref = useOutsideClick<HTMLDivElement>(context?.close);
 
   if (name !== context.openName) return null;
 
