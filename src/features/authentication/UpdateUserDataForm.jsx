@@ -45,7 +45,7 @@ function UpdateUserDataForm() {
         />
       </FormRow>
       <FormRow>
-        <Button type="reset" variation="secondary">
+        <Button type="reset" $variation="secondary">
           Cancel
         </Button>
         <Button>Update account</Button>

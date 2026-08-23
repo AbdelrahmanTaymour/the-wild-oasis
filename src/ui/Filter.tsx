@@ -11,12 +11,12 @@ const StyledFilter = styled.div`
   gap: 0.4rem;
 `;
 
-const FilterButton = styled.button<{ active: boolean }>`
+const FilterButton = styled.button<{ $active: boolean }>`
   background-color: var(--color-grey-0);
   border: none;
 
   ${(props) =>
-    props.active &&
+    props.$active &&
     css`
       background-color: var(--color-brand-600);
       color: var(--color-brand-50);
@@ -43,7 +43,7 @@ function Filter({
   options: { value: string; label: string }[];
 }) {
   const [searchPrams, setSearchPrams] = useSearchParams();
-  const currentFilter = searchPrams.get(filterField) || options.at(0);
+  const currentFilter = searchPrams.get(filterField) || options.at(0)?.value;
 
   function handleClick(value: string) {
     searchPrams.set(filterField, value);
@@ -56,7 +56,8 @@ function Filter({
         <FilterButton
           key={option.value}
           onClick={() => handleClick(option.value)}
-          active={option.value === currentFilter}
+          $active={option.value === currentFilter}
+          disabled={option.value === currentFilter}
         >
           {option.label}
         </FilterButton>
