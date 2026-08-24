@@ -13,7 +13,7 @@ export async function getBookings({
 }: {
   filter: BookingFilter | null;
   sortBy: BookingSortBy | null;
-  page: number | null;
+  page: number;
 }) {
   let query = supabase
     .from("bookings")
@@ -33,7 +33,7 @@ export async function getBookings({
 
   // PAGINAGIION
   if (page) {
-    const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE;
+    const PAGE_SIZE = Number(import.meta.env.VITE_PAGE_SIZE);
     const from = (page - 1) * PAGE_SIZE;
     const to = from + PAGE_SIZE - 1;
 
@@ -47,15 +47,13 @@ export async function getBookings({
     throw new Error("Cabins could not be loaded");
   }
 
-  console.log(data);
-
   return { data, count };
 }
 
 export async function getBooking(id: number) {
   const { data, error } = await supabase
     .from("bookings")
-    .select("*")
+    .select("*, cabins(*), guests(*)")
     .eq("id", id)
     .single();
 

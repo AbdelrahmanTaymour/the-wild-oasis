@@ -1,3 +1,6 @@
+import type { CabinData } from "./capinData";
+import type { GuestData } from "./guests";
+
 export type Booking = {
   id: number;
   startDate: Date;
@@ -5,15 +8,15 @@ export type Booking = {
   numNights: number;
   numGuests: number;
   cabinPrice: number;
-  extraPrice: number;
+  extrasPrice: number;
   totalPrice: number;
   status: string;
   hasBreakfast: boolean;
   isPaid: boolean;
   observations: string;
   created_at: Date;
-  cabinId: number;
-  guestId: number;
+  cabins: CabinData;
+  guests: GuestData;
 };
 
 export type BookingView = {
