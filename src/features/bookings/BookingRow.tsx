@@ -6,6 +6,7 @@ import Table from "../../ui/Table";
 
 import { formatCurrency } from "../../utils/helpers";
 import { formatDistanceFromNow } from "../../utils/helpers";
+import type { BookingView } from "../../types/bookings";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -47,8 +48,10 @@ function BookingRow({
     guests: { fullName: guestName, email },
     cabins: { name: cabinName },
   },
+}: {
+  booking: BookingView;
 }) {
-  const statusToTagName = {
+  const statusToTagName: Record<string, "blue" | "green" | "silver"> = {
     unconfirmed: "blue",
     "checked-in": "green",
     "checked-out": "silver",

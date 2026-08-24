@@ -1,6 +1,5 @@
 import { createContext, useContext, type ReactNode } from "react";
 import styled from "styled-components";
-import type { CabinData } from "../types/capinData";
 
 const StyledTable = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -91,6 +90,7 @@ function Header({ children }: { children: ReactNode }) {
     </StyledHeader>
   );
 }
+
 function Row({ children }: { children: ReactNode }) {
   const { columns } = useContext(TableContext);
   return (
@@ -99,12 +99,13 @@ function Row({ children }: { children: ReactNode }) {
     </StyledRow>
   );
 }
-function Body({
+
+function Body<T>({
   data,
   render,
 }: {
-  data?: CabinData[];
-  render: (cabin: CabinData, index: number) => ReactNode;
+  data?: T[];
+  render: (cabin: T, index: number) => ReactNode;
 }) {
   if (!data?.length) return <Empty>No data to show at the moment</Empty>;
 
