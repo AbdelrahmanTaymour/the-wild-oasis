@@ -9,14 +9,17 @@ import supabase from "./supabase";
 export async function getBookings({
   filter,
   sortBy,
+  page,
 }: {
   filter: BookingFilter | null;
   sortBy: BookingSortBy | null;
+  page: number | null;
 }) {
   let query = supabase
     .from("bookings")
     .select(
       "id, created_at, startDate, endDate, numNights, numGuests, status, totalPrice, cabins(name), guests(fullName, email)",
+      { count: "exact" },
     );
 
   // FILTER
@@ -28,14 +31,25 @@ export async function getBookings({
       ascending: sortBy.direction === "asc",
     });
 
-  const { data, error } = await query;
+  // PAGINAGIION
+  if (page) {
+    const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE;
+    const from = (page - 1) * PAGE_SIZE;
+    const to = from + PAGE_SIZE - 1;
+
+    query = query.range(from, to);
+  }
+
+  const { data, error, count } = await query;
 
   if (error) {
     console.error(error);
     throw new Error("Cabins could not be loaded");
   }
 
-  return data;
+  console.log(data);
+
+  return { data, count };
 }
 
 export async function getBooking(id: number) {
