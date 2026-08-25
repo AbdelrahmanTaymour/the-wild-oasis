@@ -3,18 +3,15 @@ import styled from "styled-components";
 
 const StyledTable = styled.div`
   border: 1px solid var(--color-grey-200);
-
   font-size: 1.4rem;
   background-color: var(--color-grey-0);
   border-radius: 7px;
   overflow: hidden;
 `;
 
-const CommonRow = styled.div.attrs<TableProps>((props) => ({
-  columns: props.columns,
-}))`
+const CommonRow = styled.div<{ $columns: string }>`
   display: grid;
-  grid-template-columns: ${(props) => props.columns};
+  grid-template-columns: ${(props) => props.$columns};
   column-gap: 2.4rem;
   align-items: center;
   transition: none;
@@ -49,7 +46,7 @@ const Footer = styled.footer`
   justify-content: center;
   padding: 1.2rem;
 
-  /* This will hide the footer when it contains no child elements. Possible thanks to the parent selector :has 🎉 */
+  /* Hide footer when it has no children */
   &:not(:has(*)) {
     display: none;
   }
@@ -62,19 +59,20 @@ const Empty = styled.p`
   margin: 2.4rem;
 `;
 
-interface TableProps {
+interface TableContextValue {
   columns: string;
 }
 
-const TableContext = createContext<TableProps>({ columns: "" });
+const TableContext = createContext<TableContextValue>({
+  columns: "",
+});
 
-function Table({
-  children,
-  columns,
-}: {
+interface TableProps {
   children: ReactNode;
   columns: string;
-}) {
+}
+
+function Table({ children, columns }: TableProps) {
   return (
     <TableContext.Provider value={{ columns }}>
       <StyledTable role="table">{children}</StyledTable>
@@ -82,36 +80,48 @@ function Table({
   );
 }
 
-function Header({ children }: { children: ReactNode }) {
+interface HeaderProps {
+  children: ReactNode;
+}
+
+function Header({ children }: HeaderProps) {
   const { columns } = useContext(TableContext);
+
   return (
-    <StyledHeader role="row" as="header" columns={columns}>
+    <StyledHeader role="row" as="header" $columns={columns}>
       {children}
     </StyledHeader>
   );
 }
 
-function Row({ children }: { children: ReactNode }) {
+interface RowProps {
+  children: ReactNode;
+}
+
+function Row({ children }: RowProps) {
   const { columns } = useContext(TableContext);
+
   return (
-    <StyledRow role="row" columns={columns}>
+    <StyledRow role="row" $columns={columns}>
       {children}
     </StyledRow>
   );
 }
 
-function Body<T>({
-  data,
-  render,
-}: {
+interface BodyProps<T> {
   data?: T[];
-  render: (cabin: T, index: number) => ReactNode;
-}) {
-  if (!data?.length) return <Empty>No data to show at the moment</Empty>;
-
-  return <StyledBody>{data?.map(render)}</StyledBody>;
+  render: (item: T, index: number) => ReactNode;
 }
 
+function Body<T>({ data, render }: BodyProps<T>) {
+  if (!data?.length) {
+    return <Empty>No data to show at the moment</Empty>;
+  }
+
+  return <StyledBody>{data.map(render)}</StyledBody>;
+}
+
+// Compound component API
 Table.Header = Header;
 Table.Row = Row;
 Table.Body = Body;

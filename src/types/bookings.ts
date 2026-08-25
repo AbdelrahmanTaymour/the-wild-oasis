@@ -37,19 +37,9 @@ export type BookingView = {
   };
 };
 
-export type createUpdateBooking = {
-  startDate: Date;
-  endDate: Date;
-  numNights: number;
-  numGuests: number;
-  cabinPrice: number;
-  extraPrice: number;
+export type updateBooking = {
   status: string;
-  hasBreakfast: boolean;
   isPaid: boolean;
-  observations: string;
-  cabinId: number;
-  guestId: number;
 };
 
 export type BookingFilter = {
