@@ -47,6 +47,8 @@ function Filter({
 
   function handleClick(value: string) {
     searchPrams.set(filterField, value);
+    if (searchPrams.get("page")) searchPrams.set("page", "1");
+
     setSearchPrams(searchPrams);
   }
 

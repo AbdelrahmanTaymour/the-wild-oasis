@@ -1,7 +1,7 @@
 import type {
   BookingFilter,
   BookingSortBy,
-  updateBooking,
+  UpdateBooking,
 } from "../types/bookings";
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
@@ -119,7 +119,7 @@ export async function getStaysTodayActivity() {
   return data;
 }
 
-export async function updateBooking(id: number, obj: updateBooking) {
+export async function updateBooking(id: number, obj: UpdateBooking) {
   const { data, error } = await supabase
     .from("bookings")
     .update(obj)

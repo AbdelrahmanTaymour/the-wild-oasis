@@ -3,7 +3,7 @@ import { getSettings } from "../../services/apiSettings";
 
 export function useSetting() {
   const {
-    isPending,
+    isPending: isLoadingSettings,
     data: settings,
     error,
   } = useQuery({
@@ -12,7 +12,7 @@ export function useSetting() {
   });
 
   return {
-    isPending,
+    isLoadingSettings,
     settings,
     error,
   };

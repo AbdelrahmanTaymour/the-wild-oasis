@@ -37,9 +37,12 @@ export type BookingView = {
   };
 };
 
-export type updateBooking = {
+export type UpdateBooking = {
   status: string;
-  isPaid: boolean;
+  isPaid?: boolean;
+  hasBreakfast?: boolean;
+  extrasPrice?: number;
+  totalPrice?: number;
 };
 
 export type BookingFilter = {

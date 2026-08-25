@@ -144,10 +144,12 @@ function Button({
   children,
   icon,
   onClick,
+  disabled,
 }: {
   children: ReactNode;
   icon: ReactNode;
   onClick?: () => void;
+  disabled?: boolean;
 }) {
   const context = useContext(MenusContext);
   if (!context) throw Error("Error");
@@ -161,7 +163,7 @@ function Button({
 
   return (
     <li>
-      <StyledButton onClick={handleClick}>
+      <StyledButton onClick={handleClick} disabled={disabled}>
         {icon} <span>{children}</span>
       </StyledButton>
     </li>
