@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ButtonIcon = styled.button`
+const ButtonIcon = styled.button<{ onClick?: () => void }>`
   background: none;
   border: none;
   padding: 0.6rem;

@@ -53,24 +53,3 @@ function FormRow({ label, error, children }: FormRowProps) {
 }
 
 export default FormRow;
-
-// interface FormRowProps {
-//   label?: string;
-//   error?: string;
-//   children: React.ReactNode; // Supports single elements, arrays, or fragments
-// }
-
-// function FormRow({ label, error, children }: FormRowProps) {
-//   // Safely extract 'id' only if children is a single, valid React element
-//   const childId = React.isValidElement(children)
-//     ? (children.props as { id?: string })?.id
-//     : undefined;
-
-//   return (
-//     <StyledFormRow>
-//       {label && <Label htmlFor={childId}>{label}</Label>}
-//       {children}
-//       {error && <Error>{error}</Error>}
-//     </StyledFormRow>
-//   );
-// }
