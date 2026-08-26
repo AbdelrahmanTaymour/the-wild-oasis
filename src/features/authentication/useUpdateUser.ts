@@ -1,12 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { CreateEditCabinData } from "../../types/capinData";
 import toast from "react-hot-toast";
 import { updateCurrentUser } from "../../services/apiAuth";
-
-type EditUserArgs = {
-  user: CreateEditCabinData;
-  id: number;
-};
 
 export function useUpdateUser() {
   const queryClient = useQueryClient();
