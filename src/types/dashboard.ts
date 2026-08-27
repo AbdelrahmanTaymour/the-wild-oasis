@@ -31,3 +31,27 @@ export type DashboardDurationStats = {
   value: number;
   color: string;
 };
+
+export type DashboardTodayActivities = {
+  id: number;
+  cabinId: number;
+  guestId: number;
+  cabinPrice: number;
+  created_at: Date;
+  endDate: Date;
+  extrasPrice: number;
+  hasBreakfast: boolean;
+  isPaid: boolean;
+  numGuests: number;
+  numNights: number;
+  observations: string;
+  startDate: Date;
+  status: string;
+  totalPrice: number;
+
+  guests: {
+    countryFlag: string;
+    fullName: string;
+    nationality: string;
+  };
+};
