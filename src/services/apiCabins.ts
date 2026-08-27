@@ -1,4 +1,4 @@
-import type { CreateEditCabinData } from "../types/capinData";
+import type { CreateEditCabinData } from "../types/capins";
 import supabase, { supabaseUrl } from "./supabase";
 
 export async function getCabins() {

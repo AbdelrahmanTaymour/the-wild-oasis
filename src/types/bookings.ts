@@ -1,4 +1,4 @@
-import type { CabinData } from "./capinData";
+import type { CabinData } from "./capins";
 import type { GuestData } from "./guests";
 
 export type Booking = {

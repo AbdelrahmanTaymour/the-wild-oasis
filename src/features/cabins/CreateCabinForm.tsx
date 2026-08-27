@@ -9,7 +9,7 @@ import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
 
-import type { CabinData, CabinFormData } from "../../types/capinData";
+import type { CabinData, CabinFormData } from "../../types/capins";
 import { useCreateCabin } from "./useCreateCabin";
 import { useEditCabin } from "./useUpdateCabin";
 

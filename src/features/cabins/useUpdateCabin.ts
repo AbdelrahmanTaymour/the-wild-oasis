@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { CreateEditCabinData } from "../../types/capinData";
+import type { CreateEditCabinData } from "../../types/capins";
 import { createUpdateCabin } from "../../services/apiCabins";
 import toast from "react-hot-toast";
 

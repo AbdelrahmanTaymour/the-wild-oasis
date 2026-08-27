@@ -25,3 +25,9 @@ export type StaysStatsProps = {
     fullName: string;
   };
 };
+
+export type DashboardDurationStats = {
+  duration: string;
+  value: number;
+  color: string;
+};

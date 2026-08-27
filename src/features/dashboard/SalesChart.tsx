@@ -40,6 +40,9 @@ function SalesChart({
     end: new Date(),
   });
 
+  const firstDate = allDates[0] ?? new Date();
+  const lastDate = allDates.at(-1) ?? new Date();
+
   const data = allDates.map((date) => {
     return {
       label: format(date, "MMM dd"),
@@ -68,7 +71,10 @@ function SalesChart({
 
   return (
     <StyledSalesChart>
-      <Heading as="h2">Sales</Heading>
+      <Heading as="h2">
+        Sales from {format(firstDate, "MMM dd yyyy")} &mdash;{" "}
+        {format(lastDate, "MMM dd yyyy")}
+      </Heading>
       <ResponsiveContainer height={300} width="100%">
         <AreaChart data={data}>
           <XAxis
