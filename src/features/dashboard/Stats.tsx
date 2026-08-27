@@ -6,34 +6,10 @@ import {
 } from "react-icons/hi2";
 import Stat from "./Stat";
 import { formatCurrency } from "../../utils/helpers";
-
-type BookingProps = {
-  created_at: Date;
-  totalPrice: number;
-  extrasPrice: number;
-};
-
-type StaysProps = {
-  id: number;
-  cabinId: number;
-  guestId: number;
-  cabinPrice: number;
-  created_at: Date;
-  startDate: Date;
-  endDate: Date;
-  extrasPrice: number;
-  hasBreakfast: boolean;
-  isPaid: boolean;
-  numGuests: number;
-  numNights: number;
-  observations: string;
-  status: string;
-  totalPrice: number;
-
-  guests: {
-    fullName: string;
-  };
-};
+import type {
+  BookingsStatsProps,
+  StaysStatsProps,
+} from "../../types/dashboard";
 
 function Stats({
   bookings,
@@ -41,8 +17,8 @@ function Stats({
   numDays,
   cabinCount,
 }: {
-  bookings: BookingProps[];
-  confirmedStays: StaysProps[];
+  bookings: BookingsStatsProps[];
+  confirmedStays: StaysStatsProps[];
   numDays: number;
   cabinCount: number;
 }) {

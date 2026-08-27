@@ -89,8 +89,6 @@ export async function getStaysAfterDate(date: string) {
     .gte("startDate", date)
     .lte("startDate", getToday());
 
-  console.log("Stays: ", data);
-
   if (error) {
     console.error(error);
     throw new Error("Bookings could not get loaded");
