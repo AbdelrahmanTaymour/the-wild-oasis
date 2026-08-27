@@ -1,6 +1,6 @@
 import Spinner from "../../ui/Spinner";
 import CabinRow from "./CabinRow";
-import { useCabin } from "./useCabins";
+import { useCabins } from "./useCabins";
 import Table from "../../ui/Table";
 import type { CabinData } from "../../types/capinData";
 import Menus from "../../ui/Menus";
@@ -8,7 +8,7 @@ import { useSearchParams } from "react-router-dom";
 import Empty from "../../ui/Empty";
 
 function CabinTable() {
-  const { isPending, cabins } = useCabin();
+  const { isPending, cabins } = useCabins();
   const [searchParams] = useSearchParams();
 
   if (isPending) return <Spinner />;
