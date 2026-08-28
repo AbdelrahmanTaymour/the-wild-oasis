@@ -8,7 +8,7 @@ import { useUpdateSetting } from "./useUpdateSetting";
 function UpdateSettingForm() {
   const { updateSetting, isUpdating } = useUpdateSetting();
   const {
-    isPending,
+    isLoadingSettings,
     settings: {
       minBookingLength,
       maxBookingLength,
@@ -16,7 +16,8 @@ function UpdateSettingForm() {
       breakfastPrice,
     } = {},
   } = useSetting();
-  if (isPending) return <Spinner />;
+
+  if (isLoadingSettings) return <Spinner />;
 
   function handleUpdate(
     e: React.FocusEvent<HTMLInputElement, Element>,
@@ -26,7 +27,9 @@ function UpdateSettingForm() {
 
     if (!value) return;
 
-    updateSetting({ [field]: value });
+    updateSetting(
+      { [field]: value } as unknown as Parameters<typeof updateSetting>[0],
+    );
   }
 
   return (

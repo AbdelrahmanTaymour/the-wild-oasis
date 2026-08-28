@@ -1,13 +1,26 @@
-import { createContext, useContext, useEffect, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
+} from "react";
 import { useLocalStorageState } from "../hooks/useLocalStorageState";
 
-const DarkModeContext = createContext({});
+const DarkModeContext = createContext<
+  | {
+      isDarkMode: boolean;
+      toggleDarkMode: () => void;
+    }
+  | undefined
+>(undefined);
 
 function DarkModeProvider({ children }: { children: ReactNode }) {
   const [isDarkMode, setIsDarkMode] = useLocalStorageState(
     window.matchMedia("(prefers-color-scheme: dark)").matches,
     "isDarkMode",
-  );
+  ) as [boolean, Dispatch<SetStateAction<boolean>>];
 
   useEffect(
     function () {
@@ -41,4 +54,6 @@ function useDarkMode() {
   return context;
 }
 
+// The provider and its hook are intentionally co-located in this context module.
+// eslint-disable-next-line react-refresh/only-export-components
 export { DarkModeProvider, useDarkMode };

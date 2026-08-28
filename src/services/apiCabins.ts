@@ -20,7 +20,7 @@ export async function createUpdateCabin(
     typeof newCabin.image === "string" &&
     newCabin.image?.startsWith?.(supabaseUrl);
 
-  const imageName = `${Math.random()}-${newCabin.image.name}`.replaceAll(
+  const imageName = `${Math.random()}-${typeof newCabin.image === "string" ? "image" : newCabin.image.name}`.replaceAll(
     "/",
     "",
   );
@@ -30,14 +30,26 @@ export async function createUpdateCabin(
     : `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
 
   // 1. Create/edit a cabin
-  let query = supabase.from("cabins");
+  let data, error;
 
   // A) CREATE
-  if (!id) query = query.insert([{ ...newCabin, image: imagePath }]);
+  if (!id) {
+    ({ data, error } = await supabase
+      .from("cabins")
+      .insert([{ ...newCabin, image: imagePath }])
+      .select()
+      .single());
+  }
 
-  if (id) query = query.update({ ...newCabin, image: imagePath }).eq("id", id);
-
-  const { data, error } = await query.select().single();
+  // B) UPDATE
+  if (id) {
+    ({ data, error } = await supabase
+      .from("cabins")
+      .update({ ...newCabin, image: imagePath })
+      .eq("id", id)
+      .select()
+      .single());
+  }
 
   if (error) {
     console.error(error);

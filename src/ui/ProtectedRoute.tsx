@@ -14,7 +14,7 @@ const FullPage = styled.div`
 
 function ProtectedRoute({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
-  const { user, isPending: isLoading, isAuthenticated } = useUser();
+  const { isPending: isLoading, isAuthenticated } = useUser();
 
   useEffect(() => {
     if (!isAuthenticated && !isLoading) navigate("/login");

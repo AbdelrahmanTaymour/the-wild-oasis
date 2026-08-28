@@ -41,7 +41,7 @@ const Discount = styled.div`
 
 function CabinRow({ cabin }: { cabin: CabinData }) {
   const { isDeleting, deleteCabin } = useDeleteCabin();
-  const { createCabin } = useCreateCabin();
+  const { isCreating, createCabin } = useCreateCabin();
 
   const {
     id: cabinId,
@@ -83,7 +83,11 @@ function CabinRow({ cabin }: { cabin: CabinData }) {
             <Menus.Toogle id={cabinId} />
 
             <Menus.List id={cabinId}>
-              <Menus.Button icon={<HiSquare2Stack />} onClick={handleDublicate}>
+              <Menus.Button
+                icon={<HiSquare2Stack />}
+                onClick={handleDublicate}
+                disabled={isCreating}
+              >
                 Duplication
               </Menus.Button>
 
