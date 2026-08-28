@@ -103,6 +103,8 @@ function Toggle({ id }: { id: number }) {
   const { openId, close, open, setPosition } = context;
 
   function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
+    e.stopPropagation();
+
     const rect = e.currentTarget.getBoundingClientRect();
 
     setPosition({
@@ -128,7 +130,7 @@ function List({ id, children }: { id: number; children: ReactNode }) {
   const { openId, position, close } = context;
 
   // Pass HTMLUListElement to match <StyledList> (ul)
-  const ref = useOutsideClick<HTMLUListElement>(close);
+  const ref = useOutsideClick<HTMLUListElement>(close, false);
 
   if (openId !== id || !position) return null;
 
