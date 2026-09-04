@@ -1,4 +1,4 @@
-import type { CreateEditCabinData } from "../types/capins";
+import type { CreateEditCabin } from "../types/capins";
 import supabase, { supabaseUrl } from "./supabase";
 
 export async function getCabins() {
@@ -13,17 +13,18 @@ export async function getCabins() {
 }
 
 export async function createUpdateCabin(
-  newCabin: CreateEditCabinData,
+  newCabin: CreateEditCabin,
   id?: number,
 ) {
   const hasImagePath =
     typeof newCabin.image === "string" &&
     newCabin.image?.startsWith?.(supabaseUrl);
 
-  const imageName = `${Math.random()}-${typeof newCabin.image === "string" ? "image" : newCabin.image.name}`.replaceAll(
-    "/",
-    "",
-  );
+  const imageName =
+    `${Math.random()}-${typeof newCabin.image === "string" ? "image" : newCabin.image.name}`.replaceAll(
+      "/",
+      "",
+    );
 
   const imagePath = hasImagePath
     ? newCabin.image

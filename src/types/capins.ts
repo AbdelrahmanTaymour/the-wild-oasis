@@ -1,4 +1,4 @@
-export type CabinData = {
+export interface Cabin {
   id: number;
   name: string;
   description: string;
@@ -6,22 +6,22 @@ export type CabinData = {
   regularPrice: number;
   discount: number;
   image: string;
-};
+}
 
-export type CabinFormData = {
+export interface CabinForm {
   name: string;
   description: string;
   maxCapacity: number;
   regularPrice: number;
   discount: number;
   image?: FileList;
-};
+}
 
-export type CreateEditCabinData = {
+export interface CreateEditCabin {
   name: string;
   description: string;
   maxCapacity: number;
   regularPrice: number;
   discount: number;
   image: File | string;
-};
+}

@@ -9,7 +9,7 @@ import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
 
-import type { CabinData, CabinFormData } from "../../types/capins";
+import type { Cabin, CabinForm } from "../../types/capins";
 import { useCreateCabin } from "./useCreateCabin";
 import { useEditCabin } from "./useUpdateCabin";
 
@@ -17,7 +17,7 @@ function CreateCabinForm({
   cabinToEdit,
   onCloseModal,
 }: {
-  cabinToEdit?: CabinData;
+  cabinToEdit?: Cabin;
   onCloseModal?: CallableFunction;
 }) {
   const { isCreating, createCabin } = useCreateCabin();
@@ -31,7 +31,7 @@ function CreateCabinForm({
     reset,
     getValues,
     formState: { errors },
-  } = useForm<CabinFormData>({
+  } = useForm<CabinForm>({
     defaultValues: cabinToEdit
       ? {
           name: cabinToEdit.name,
@@ -46,7 +46,7 @@ function CreateCabinForm({
         },
   });
 
-  const onSubmit: SubmitHandler<CabinFormData> = (data) => {
+  const onSubmit: SubmitHandler<CabinForm> = (data) => {
     const image = data.image?.[0];
 
     // CREATE

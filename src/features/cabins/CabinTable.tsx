@@ -2,7 +2,7 @@ import Spinner from "../../ui/Spinner";
 import CabinRow from "./CabinRow";
 import { useCabins } from "./useCabins";
 import Table from "../../ui/Table";
-import type { CabinData } from "../../types/capins";
+import type { Cabin } from "../../types/capins";
 import Menus from "../../ui/Menus";
 import { useSearchParams } from "react-router-dom";
 import Empty from "../../ui/Empty";
@@ -53,9 +53,7 @@ function CabinTable() {
 
         <Table.Body
           data={sortedCabins}
-          render={(cabin: CabinData) => (
-            <CabinRow cabin={cabin} key={cabin.id} />
-          )}
+          render={(cabin: Cabin) => <CabinRow cabin={cabin} key={cabin.id} />}
         />
       </Table>
     </Menus>

@@ -1,7 +1,7 @@
-import type { CabinData } from "./capins";
-import type { GuestData } from "./guests";
+import type { Cabin } from "./capins";
+import type { Guest } from "./guests";
 
-export type Booking = {
+export interface Booking {
   id: number;
   startDate: Date;
   endDate: Date;
@@ -15,11 +15,11 @@ export type Booking = {
   isPaid: boolean;
   observations: string;
   created_at: Date;
-  cabins: CabinData;
-  guests: GuestData;
-};
+  cabins: Cabin;
+  guests: Guest;
+}
 
-export type BookingView = {
+export interface BookingView {
   id: number;
   created_at: Date;
   startDate: Date;
@@ -35,22 +35,22 @@ export type BookingView = {
     fullName: string;
     email: string;
   };
-};
+}
 
-export type UpdateBooking = {
+export interface UpdateBooking {
   status: string;
   isPaid?: boolean;
   hasBreakfast?: boolean;
   extrasPrice?: number;
   totalPrice?: number;
-};
+}
 
-export type BookingFilter = {
+export interface BookingFilter {
   field: string;
   value: string;
-};
+}
 
-export type BookingSortBy = {
+export interface BookingSortBy {
   field: string;
-  direction: string;
-};
+  direction: "asc" | "desc";
+}
